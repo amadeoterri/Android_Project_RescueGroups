@@ -15,7 +15,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AnimalsAsyncTask extends AsyncTask<ListView, Void, List<Animal>> {
+public class AnimalsAsyncTask extends AsyncTask<Void, Void, List<Animal>> {
 
     private ListView listView;
     Context context;
@@ -25,8 +25,7 @@ public class AnimalsAsyncTask extends AsyncTask<ListView, Void, List<Animal>> {
     }
 
     @Override
-    protected List<Animal> doInBackground(ListView... listViews) {
-        listView = listViews[0];
+    protected List<Animal> doInBackground(Void... voids) {
         List<Animal> animalList = loadJSONFromAsset();
         return animalList;
     }
@@ -47,7 +46,7 @@ public class AnimalsAsyncTask extends AsyncTask<ListView, Void, List<Animal>> {
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
             String line ="";
             int counter = 1;
-            while (((line = br.readLine()) != null && counter < 1000)) {
+            while (((line = br.readLine()) != null && counter < 5000)) {
                 JSONResponseImplSingle responseImpl = new JSONResponseImplSingle();
                 Animal animal = responseImpl.handleAnimalResponse(line);
                 if(animal !=null){

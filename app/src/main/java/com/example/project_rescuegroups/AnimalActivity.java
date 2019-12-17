@@ -40,7 +40,7 @@ public class AnimalActivity extends AppCompatActivity {
 
         //asynctask om elementen uit json file te halen
         //listview meegeven
-        new AnimalsAsyncTask(this).execute(listView);
+        /*new AnimalsAsyncTask(this).execute();*/
 
         AnimalDB sh = new AnimalDB(this);
         Cursor cursor = sh.getAllAnimals();

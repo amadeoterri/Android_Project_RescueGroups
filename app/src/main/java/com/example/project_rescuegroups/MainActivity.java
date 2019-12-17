@@ -7,12 +7,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.project_rescuegroups.asynctask.AnimalsAsyncTask;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        new AnimalsAsyncTask(this).execute();
 
         final Button btnAnimalList = findViewById(R.id.btnShowAnimals);
         final Button btnOrganizationList = findViewById(R.id.btnShowOrganizations);
