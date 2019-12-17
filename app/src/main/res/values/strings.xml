@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Project_RescueGroups</string>
+    <string name="btnMain_showAnimals">Show</string>
+    <string name="btnMain_showOrganizations">Show</string>
+    <string name="btnShowFavorites">Show</string>
+    <string name="MainTitle">RescueGroups</string>
+    <string name="SubtitleMain">.org</string>
+    <string name="AnimalsTitleMain">Animals</string>
+    <string name="OrganizationsMain">Organizations</string>
+    <string name="favoritesMain">Favorites</string>
+    <string name="searchAnimals">Search</string>
+
+    <string-array name="species_array">
+        <item>All</item>
+        <item>Cat</item>
+        <item>Dog</item>
+    </string-array>
+
+</resources>
