@@ -32,7 +32,7 @@ public class AnimalActivity extends AppCompatActivity {
 
         context = this;
 
-        Intent intent = getIntent();
+/*        Intent intent = getIntent();
         String choice = intent.getStringExtra("species");
 
 
@@ -40,7 +40,7 @@ public class AnimalActivity extends AppCompatActivity {
 
         //asynctask om elementen uit json file te halen
         //listview meegeven
-        /*new AnimalsAsyncTask(this).execute();*/
+        *//*new AnimalsAsyncTask(this).execute();*//*
 
         AnimalDB sh = new AnimalDB(this);
         Cursor cursor = sh.getAllAnimals();
@@ -86,6 +86,6 @@ public class AnimalActivity extends AppCompatActivity {
                 intent.putExtra("animal",animal);
                 startActivity(intent);
             }
-        });
+        });*/
     }
 }

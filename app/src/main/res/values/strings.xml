@@ -9,6 +9,8 @@
     <string name="OrganizationsMain">Organizations</string>
     <string name="favoritesMain">Favorites</string>
     <string name="searchAnimals">Search</string>
+    <string name="searchChooseBreed">Choose Breed</string>
+    <string name="searchChooseSpecies">Choose Species</string>
 
     <string-array name="species_array">
         <item>All</item>

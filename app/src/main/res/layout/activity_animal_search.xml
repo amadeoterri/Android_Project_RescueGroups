@@ -7,8 +7,32 @@
     tools:context=".AnimalSearchActivity"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/tvChooseSpecies"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/searchChooseSpecies"
+        android:layout_gravity="left"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        android:textColor="?colorPrimary" />
     <Spinner
         android:id="@+id/spinnerSpecies"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"/>
+    <TextView
+        android:id="@+id/tvChooseBreed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/searchChooseBreed"
+        android:layout_gravity="left"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        android:textColor="?colorPrimary" />
+    <Spinner
+        android:id="@+id/spinnerBreed"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"

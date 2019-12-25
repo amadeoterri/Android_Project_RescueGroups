@@ -17,7 +17,7 @@ import java.util.ArrayList;
  */
 
 public class SchemaHelper extends SQLiteOpenHelper {
-    private final static String DATABASE_NAAM = "Animalss";
+    private final static String DATABASE_NAAM = "Animals";
     private static final int DATABASE_VERSIE = 5;
 
     public SchemaHelper(Context context) {
@@ -30,8 +30,9 @@ public class SchemaHelper extends SQLiteOpenHelper {
         //TODO aanvullen : AnimalFavoritesTabel creëren
         db.execSQL("CREATE TABLE "
                 + AnimalTabel.TABEL_NAAM
-                + " (" + AnimalTabel.ANIMAL_ID
-                + " INTEGER PRIMARY KEY,"
+                + " (" + AnimalTabel.KEY_ID
+                + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + AnimalTabel.ANIMAL_ID + " TEXT,"
                 + AnimalTabel.ANIMAL_NAME + " TEXT,"
                 + AnimalTabel.ANIMAL_SPECIES + " TEXT,"
                 + AnimalTabel.ANIMAL_BREED + " TEXT,"

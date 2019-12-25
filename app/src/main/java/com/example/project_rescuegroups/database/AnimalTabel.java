@@ -6,6 +6,7 @@ package com.example.project_rescuegroups.database;
 
 public interface AnimalTabel {
     //TODO velden invullen
+    String KEY_ID="Id";
     String ANIMAL_ID="animalId";
     String ANIMAL_NAME = "animalName";
     String ANIMAL_BREED = "animalBreed";
