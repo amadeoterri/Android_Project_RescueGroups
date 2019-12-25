@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.project_rescuegroups.model.Animal;
+import com.example.project_rescuegroups.util.ChoiceParamData;
 
 public class AnimalDB extends SchemaHelper{
 
@@ -35,10 +36,17 @@ public class AnimalDB extends SchemaHelper{
         return sd.rawQuery("SELECT * FROM " + AnimalTabel.TABEL_NAAM,null);
     }
 
-    public Cursor getAnimalsWithParams(String choice) {
+    public Cursor getAnimalsWithParams(ChoiceParamData choice) {
         SQLiteDatabase sd = getWritableDatabase();
-        /*return sd.query(AnimalTabel.TABEL_NAAM,resultColumn,null,null,null,null,null,null);*/
-        return sd.rawQuery("SELECT * FROM " + AnimalTabel.TABEL_NAAM + " WHERE " + AnimalTabel.ANIMAL_SPECIES + " =  ?",new String[]{choice});
+        String species = choice.getsChoiceSpecies();
+        String breed = choice.getsChoiceBreed();
+        return sd.rawQuery("SELECT * FROM " + AnimalTabel.TABEL_NAAM + " WHERE " + AnimalTabel.ANIMAL_SPECIES + " =  ? AND " + AnimalTabel.ANIMAL_BREED + " = ? " + "GROUP BY " + AnimalTabel.ANIMAL_NAME,new String[]{choice.getsChoiceSpecies(),choice.getsChoiceBreed()});
+        /*SQLiteDatabase sd = getReadableDatabase();
+        String whereClause = AnimalTabel.ANIMAL_SPECIES  + " = ?";
+        String[] whereArgs = new String[]{choice.getsChoiceSpecies(),choice.getsChoiceBreed()};
+
+        return sd.query(true,AnimalTabel.TABEL_NAAM,new String[]{AnimalTabel.ANIMAL_BREED},whereClause,whereArgs,AnimalTabel.ANIMAL_NAME,null,null,null);
+    */
     }
 
     public Cursor getAnimalsUniqueSpecies(){
@@ -48,8 +56,11 @@ public class AnimalDB extends SchemaHelper{
         return sd.query(true,AnimalTabel.TABEL_NAAM,new String[]{AnimalTabel.ANIMAL_SPECIES},null,null,AnimalTabel.ANIMAL_SPECIES,null,null,null);
     }
 
-    public Cursor getAnimalsUniqueBreed(){
+    public Cursor getAnimalsUniqueBreed(String species){
         SQLiteDatabase sd = getReadableDatabase();
-        return sd.query(true,AnimalTabel.TABEL_NAAM,new String[]{AnimalTabel.ANIMAL_BREED},null,null,AnimalTabel.ANIMAL_BREED,null,null,null);
+        String whereClause = AnimalTabel.ANIMAL_SPECIES  + " = ?";
+        String[] whereArgs = new String []{species};
+
+        return sd.query(true,AnimalTabel.TABEL_NAAM,new String[]{AnimalTabel.ANIMAL_BREED},whereClause,whereArgs,AnimalTabel.ANIMAL_BREED,null,null,null);
     }
 }

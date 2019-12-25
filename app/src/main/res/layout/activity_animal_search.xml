@@ -16,12 +16,30 @@
         android:layout_gravity="left"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
         android:textColor="?colorPrimary" />
-    <Spinner
-        android:id="@+id/spinnerSpecies"
-        android:layout_width="fill_parent"
+
+    <RadioGroup
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"/>
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rbtDogs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="radioButtonClicked"
+            android:checked="true"
+            android:text="@string/rbtDogs" />
+
+        <RadioButton
+            android:id="@+id/rbtCats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="radioButtonClicked"
+            android:layout_weight="1"
+            android:text="@string/rbtCats" />
+
+    </RadioGroup>
     <TextView
         android:id="@+id/tvChooseBreed"
         android:layout_width="match_parent"
@@ -33,6 +51,21 @@
         android:textColor="?colorPrimary" />
     <Spinner
         android:id="@+id/spinnerBreed"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"/>
+    <TextView
+        android:id="@+id/tvChooseSex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/searchChooseSex"
+        android:layout_gravity="left"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        android:textColor="?colorPrimary" />
+    <Spinner
+        android:id="@+id/spinnerSex"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"

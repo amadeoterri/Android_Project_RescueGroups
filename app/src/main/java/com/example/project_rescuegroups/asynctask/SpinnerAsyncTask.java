@@ -22,6 +22,7 @@ public class SpinnerAsyncTask extends AsyncTask<SearchParamData, Void, List<Stri
 
     private Context context;
     private Spinner spinner;
+    private String species;
 
     //constructor om context te weten
     public SpinnerAsyncTask(Context myContext) {
@@ -30,15 +31,14 @@ public class SpinnerAsyncTask extends AsyncTask<SearchParamData, Void, List<Stri
 
     @Override
     protected List<String> doInBackground(SearchParamData... searchParamData) {
-        spinner = searchParamData[0].getSpinnerSpecies();
+        spinner = searchParamData[0].getSpinner();
+        species = searchParamData[0].getsRadioSelection();
         List<String> spinnerArray = new ArrayList<>();
         spinnerArray.add("All");
         AnimalDB sh = new AnimalDB(context);
         Cursor cursor = null;
         switch(searchParamData[0].getsSpinnerId()){
-            case "species":cursor = sh.getAnimalsUniqueSpecies();
-            break;
-            case "breed":cursor = sh.getAnimalsUniqueBreed();
+            case "breed":cursor = sh.getAnimalsUniqueBreed(species);
             break;
             default:break;
         }

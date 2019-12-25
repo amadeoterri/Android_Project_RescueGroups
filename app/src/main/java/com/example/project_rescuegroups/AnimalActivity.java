@@ -17,6 +17,7 @@ import com.example.project_rescuegroups.database.AnimalDB;
 import com.example.project_rescuegroups.database.AnimalFavoritesDB;
 import com.example.project_rescuegroups.database.AnimalTabel;
 import com.example.project_rescuegroups.model.Animal;
+import com.example.project_rescuegroups.util.ChoiceParamData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,41 +32,41 @@ public class AnimalActivity extends AppCompatActivity {
         setContentView(R.layout.activity_animal);
 
         context = this;
-
-/*        Intent intent = getIntent();
-        String choice = intent.getStringExtra("species");
+        Intent intent = getIntent();
+        ChoiceParamData choice = intent.getParcelableExtra("choice");
 
 
         final ListView listView = findViewById(R.id.listViewAnimals);
 
         //asynctask om elementen uit json file te halen
         //listview meegeven
-        *//*new AnimalsAsyncTask(this).execute();*//*
+        new AnimalsAsyncTask(this).execute();
 
         AnimalDB sh = new AnimalDB(this);
-        Cursor cursor = sh.getAllAnimals();
-        switch (choice){
+        //Cursor cursor = sh.getAllAnimals();
+        Cursor cursor = sh.getAnimalsWithParams(choice);
+        /*switch (choice){
             case "Cat": cursor = sh.getAnimalsWithParams("Cat");
             break;
             case "Dog": cursor = sh.getAnimalsWithParams("Dog");
             break;
             case "All": cursor = sh.getAllAnimals();
             break;
-        }
+        }*/
 
         animalList = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
             while (!cursor.isAfterLast()) {
 
-                int id = cursor.getInt(0);
-                String naam = cursor.getString(1);
-                String species = cursor.getString(2);
-                String breed = cursor.getString(3);
-                String sex = cursor.getString(4);
-                String birthdate = cursor.getString(5);
-                String imageurl = cursor.getString(6);
-                String desc = cursor.getString(7);
+                int id = cursor.getInt(1);
+                String naam = cursor.getString(2);
+                String species = cursor.getString(3);
+                String breed = cursor.getString(4);
+                String sex = cursor.getString(5);
+                String birthdate = cursor.getString(6);
+                String imageurl = cursor.getString(7);
+                String desc = cursor.getString(8);
                 Animal animal = new Animal(id,naam,species,breed,sex,birthdate,imageurl,desc);
                 animalList.add(animal);
                 cursor.moveToNext();
@@ -86,6 +87,6 @@ public class AnimalActivity extends AppCompatActivity {
                 intent.putExtra("animal",animal);
                 startActivity(intent);
             }
-        });*/
+        });
     }
 }

@@ -11,11 +11,14 @@
     <string name="searchAnimals">Search</string>
     <string name="searchChooseBreed">Choose Breed</string>
     <string name="searchChooseSpecies">Choose Species</string>
+    <string name="rbtCats">Cats</string>
+    <string name="rbtDogs">Dogs</string>
+    <string name="searchChooseSex">Choose Sex</string>
 
-    <string-array name="species_array">
+    <string-array name="sex_array">
         <item>All</item>
-        <item>Cat</item>
-        <item>Dog</item>
+        <item>Male</item>
+        <item>Female</item>
     </string-array>
 
 </resources>
