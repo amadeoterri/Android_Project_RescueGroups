@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.project_rescuegroups.adapter.AnimalAdapter;
@@ -18,6 +19,7 @@ import com.example.project_rescuegroups.database.AnimalFavoritesDB;
 import com.example.project_rescuegroups.database.AnimalTabel;
 import com.example.project_rescuegroups.model.Animal;
 import com.example.project_rescuegroups.util.ChoiceParamData;
+import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +37,6 @@ public class AnimalActivity extends AppCompatActivity {
         Intent intent = getIntent();
         ChoiceParamData choice = intent.getParcelableExtra("choice");
 
-
         final ListView listView = findViewById(R.id.listViewAnimals);
 
         //asynctask om elementen uit json file te halen
@@ -43,17 +44,7 @@ public class AnimalActivity extends AppCompatActivity {
         new AnimalsAsyncTask(this).execute();
 
         AnimalDB sh = new AnimalDB(this);
-        //Cursor cursor = sh.getAllAnimals();
         Cursor cursor = sh.getAnimalsWithParams(choice);
-        /*switch (choice){
-            case "Cat": cursor = sh.getAnimalsWithParams("Cat");
-            break;
-            case "Dog": cursor = sh.getAnimalsWithParams("Dog");
-            break;
-            case "All": cursor = sh.getAllAnimals();
-            break;
-        }*/
-
         animalList = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
@@ -76,17 +67,7 @@ public class AnimalActivity extends AppCompatActivity {
 
         AnimalAdapter animalAdapter = new AnimalAdapter(listView.getContext(),animalList);
         listView.setAdapter(animalAdapter);
+        listView.setFocusable(false);
 
-        listView.setClickable(true);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Animal animal = (Animal) listView.getItemAtPosition(position);
-                Intent intent = new Intent();
-                intent.setClass(context,AnimalDetail.class);
-                intent.putExtra("animal",animal);
-                startActivity(intent);
-            }
-        });
     }
 }

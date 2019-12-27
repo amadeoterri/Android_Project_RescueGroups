@@ -14,6 +14,7 @@
     <string name="rbtCats">Cats</string>
     <string name="rbtDogs">Dogs</string>
     <string name="searchChooseSex">Choose Sex</string>
+    <string name="animalListShowDetails">Details</string>
 
     <string-array name="sex_array">
         <item>All</item>

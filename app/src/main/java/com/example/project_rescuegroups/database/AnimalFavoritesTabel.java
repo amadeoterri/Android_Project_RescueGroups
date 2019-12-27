@@ -10,4 +10,5 @@ public interface AnimalFavoritesTabel {
     String ANIMAL_ID="_animalID";
     String ANIMAL_NAME = "_animalName";
     String TABEL_NAAM = "tblAnimalFavorite";
+    String KEY_ID = "Id" ;
 }

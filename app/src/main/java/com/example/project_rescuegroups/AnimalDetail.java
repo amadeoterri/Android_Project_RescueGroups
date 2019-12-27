@@ -30,10 +30,10 @@ public class AnimalDetail extends AppCompatActivity {
 
         tvName.setText(a.getAnimalName());
         Picasso.get().load(a.getAnimalImageUrl()).into(imgDetail);
-        tvBreed.setText(a.getAnimalBreed());
-        tvSex.setText(a.getAnimalSex());
-        tvSpecies.setText(a.getAnimalSpecies());
-        tvBirthDate.setText(a.getAnimalBirthDate());
+        tvBreed.setText("Breed: " + a.getAnimalBreed());
+        tvSex.setText("Sex: " + a.getAnimalSex());
+        tvSpecies.setText("Species: " + a.getAnimalSpecies());
+        tvBirthDate.setText("Birthdate: " + a.getAnimalBirthDate());
         tvDescription.setText(a.getAnimalDescription());
     }
 }

@@ -17,7 +17,7 @@ import java.util.ArrayList;
  */
 
 public class SchemaHelper extends SQLiteOpenHelper {
-    private final static String DATABASE_NAAM = "Animals";
+    private final static String DATABASE_NAAM = "Animalss";
     private static final int DATABASE_VERSIE = 5;
 
     public SchemaHelper(Context context) {
@@ -27,7 +27,6 @@ public class SchemaHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        //TODO aanvullen : AnimalFavoritesTabel creëren
         db.execSQL("CREATE TABLE "
                 + AnimalTabel.TABEL_NAAM
                 + " (" + AnimalTabel.KEY_ID
@@ -41,20 +40,23 @@ public class SchemaHelper extends SQLiteOpenHelper {
                 + AnimalTabel.ANIMAL_IMAGE + " TEXT,"
                 + AnimalTabel.ANIMAL_DESC + " TEXT);"
         );
+
+        db.execSQL("CREATE TABLE "
+                + AnimalFavoritesTabel.TABEL_NAAM
+                + " (" + AnimalFavoritesTabel.KEY_ID
+                + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + AnimalFavoritesTabel.ANIMAL_ID + " TEXT,"
+                + AnimalFavoritesTabel.ANIMAL_NAME + " TEXT);"
+        );
+
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        //TODO aanvullen
         db.execSQL("DROP TABLE IF EXISTS "+ AnimalFavoritesTabel.TABEL_NAAM);
         onCreate(db);
     }
 
-    public Cursor getData(){
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + AnimalTabel.TABEL_NAAM,null);
-        return cursor;
-    }
     public ArrayList<Cursor> getData(String Query){
         //get writable database
         SQLiteDatabase sqlDB = this.getWritableDatabase();

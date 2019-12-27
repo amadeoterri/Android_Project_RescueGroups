@@ -40,7 +40,24 @@ public class AnimalDB extends SchemaHelper{
         SQLiteDatabase sd = getWritableDatabase();
         String species = choice.getsChoiceSpecies();
         String breed = choice.getsChoiceBreed();
-        return sd.rawQuery("SELECT * FROM " + AnimalTabel.TABEL_NAAM + " WHERE " + AnimalTabel.ANIMAL_SPECIES + " =  ? AND " + AnimalTabel.ANIMAL_BREED + " = ? " + "GROUP BY " + AnimalTabel.ANIMAL_NAME,new String[]{choice.getsChoiceSpecies(),choice.getsChoiceBreed()});
+        String sex = choice.getsChoiceSex();
+
+        if(breed.equals("All") && sex.equals("All")){
+            return sd.rawQuery("SELECT * FROM " + AnimalTabel.TABEL_NAAM + " WHERE " + AnimalTabel.ANIMAL_SPECIES + " =  ? " + "GROUP BY " + AnimalTabel.ANIMAL_NAME,new String[]{species});
+        }
+        else if(breed.equals("All") && !sex.equals("All")){
+            return sd.rawQuery("SELECT * FROM " + AnimalTabel.TABEL_NAAM + " WHERE " + AnimalTabel.ANIMAL_SPECIES + " =  ? AND "  + AnimalTabel.ANIMAL_SEX + " = ? " + "GROUP BY " + AnimalTabel.ANIMAL_NAME,new String[]{species,sex});
+        }
+        else if(!breed.equals("All") && !sex.equals("All")){
+            return sd.rawQuery("SELECT * FROM " + AnimalTabel.TABEL_NAAM + " WHERE " + AnimalTabel.ANIMAL_SPECIES + " =  ? AND " + AnimalTabel.ANIMAL_BREED + " = ? AND "  + AnimalTabel.ANIMAL_SEX + " = ? "  + "GROUP BY " + AnimalTabel.ANIMAL_NAME,new String[]{species,breed});
+        }
+        else if(!breed.equals("All") && sex.equals("All")){
+            return sd.rawQuery("SELECT * FROM " + AnimalTabel.TABEL_NAAM + " WHERE " + AnimalTabel.ANIMAL_SPECIES + " =  ? AND " + AnimalTabel.ANIMAL_BREED + " = ? " + "GROUP BY " + AnimalTabel.ANIMAL_NAME,new String[]{species,breed});
+        }
+        else{
+            return null;
+        }
+
         /*SQLiteDatabase sd = getReadableDatabase();
         String whereClause = AnimalTabel.ANIMAL_SPECIES  + " = ?";
         String[] whereArgs = new String[]{choice.getsChoiceSpecies(),choice.getsChoiceBreed()};

@@ -4,18 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
 import android.widget.Spinner;
-import android.widget.Toast;
 
+import com.example.project_rescuegroups.adapter.CustomSpinnerAdapter;
 import com.example.project_rescuegroups.asynctask.SpinnerAsyncTask;
 import com.example.project_rescuegroups.util.ChoiceParamData;
 import com.example.project_rescuegroups.util.SearchParamData;
 import com.google.android.material.button.MaterialButton;
+
+import java.util.Arrays;
+import java.util.List;
 
 
 public class AnimalSearchActivity extends AppCompatActivity{
@@ -34,20 +35,12 @@ public class AnimalSearchActivity extends AppCompatActivity{
         spinnerSex = (Spinner) findViewById(R.id.spinnerSex);
 
         //make sexSpinner (all,male,female)
-        ArrayAdapter<CharSequence> sexAdapter = ArrayAdapter.createFromResource(this,R.array.sex_array,android.R.layout.simple_spinner_item);
-        sexAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        List<String> sex = Arrays.asList(getResources().getStringArray(R.array.sex_array));
+        CustomSpinnerAdapter sexAdapter = new CustomSpinnerAdapter(this,sex);
         spinnerSex.setAdapter(sexAdapter);
 
         //update other spinners
         UpdateSpinners("Dog");
-
-
-        /*spinnerSpecies.setOnItemSelectedListener(this);*/
-        /*SearchParamData asyncParams2 = new SearchParamData(spinnerBreed,"breed");
-        new SpinnerAsyncTask(this).execute(asyncParams2);*/
-
-        /*String text = (String) spinnerSpecies.getSelectedItem();
-        Toast.makeText(this, text, Toast.LENGTH_LONG).show();*/
 
         //search
         MaterialButton btnSearch = findViewById(R.id.btnSearch);

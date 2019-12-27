@@ -38,7 +38,7 @@ public class JSONResponseImplSingle {
                 //als het dier geen foto's heeft, niet toevoegen
                 if(name.length()>0 && species.length()>0 && breed.length()>0 && sex.length()>0 && birthdate.length()>0 && jsonArray.length() > 0 && description.length()>0) {
                     JSONObject object = jsonArray.getJSONObject(0);
-                    String url = object.getString("thumbnailUrl");
+                    String url = object.getString("originalUrl");
                     return new Animal(id, name, species, breed, sex, birthdate, url,description);
                 }
 

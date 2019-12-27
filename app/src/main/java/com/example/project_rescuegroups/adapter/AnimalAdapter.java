@@ -1,6 +1,8 @@
 package com.example.project_rescuegroups.adapter;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +17,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
+import com.example.project_rescuegroups.AnimalDetail;
 import com.example.project_rescuegroups.R;
 import com.example.project_rescuegroups.database.AnimalFavoritesDB;
 import com.example.project_rescuegroups.model.Animal;
+import com.google.android.material.button.MaterialButton;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -46,25 +50,38 @@ public class AnimalAdapter extends ArrayAdapter<Animal> {
 
         final Animal animal = animalList.get(position);
         ImageView imageView = convertView.findViewById(R.id.imgAnimal);
-        TextView textView = convertView.findViewById(R.id.tvAnimalName);
-        final ImageButton star = convertView.findViewById(R.id.btn_star);
+        TextView textViewName = convertView.findViewById(R.id.tvAnimalName);
+        TextView textViewInfo = convertView.findViewById(R.id.tvAnimalInfo);
+
+        final ImageButton favorite = convertView.findViewById(R.id.btn_heart);
 
         Picasso.get().load(animal.getAnimalImageUrl()).into(imageView);
-        textView.setText(animal.getAnimalName());
-        star.setImageDrawable(convertView.getResources().getDrawable(android.R.drawable.btn_star));
-        star.setFocusable(false);
+        textViewName.setText(animal.getAnimalName());
+        textViewInfo.setText("Gender: " + animal.getAnimalSex() + "\n"
+                                + "Breed: " + animal.getAnimalBreed() + "\n"
+                                + "Birthdate: " + animal.getAnimalBirthDate());
 
-        star.setOnClickListener(new View.OnClickListener() {
+        favorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(isEnable) {
-                    star.setImageDrawable(ContextCompat.getDrawable(getContext(), android.R.drawable.btn_star_big_on));
+                    favorite.setImageDrawable(ContextCompat.getDrawable(getContext(),R.drawable.favorite));
                     addDbFavorite(animal);
                 }
                 else{
-                    star.setImageDrawable(ContextCompat.getDrawable(getContext(), android.R.drawable.btn_star_big_off));
+                    favorite.setImageDrawable(ContextCompat.getDrawable(getContext(),R.drawable.unfavorite));
                 }
                 isEnable = !isEnable;
+            }
+        });
+
+        MaterialButton btnDetail = convertView.findViewById(R.id.btnShowDetail);
+        btnDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,AnimalDetail.class);
+                intent.putExtra("animal",animal);
+                context.startActivity(intent);
             }
         });
         return convertView;

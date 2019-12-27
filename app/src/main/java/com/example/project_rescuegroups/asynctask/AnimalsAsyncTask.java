@@ -46,7 +46,7 @@ public class AnimalsAsyncTask extends AsyncTask<Void, Void, List<Animal>> {
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
             String line ="";
             int counter = 1;
-            while (((line = br.readLine()) != null && counter < 100)) {
+            while (((line = br.readLine()) != null && counter < 1000)) {
                 JSONResponseImplSingle responseImpl = new JSONResponseImplSingle();
                 Animal animal = responseImpl.handleAnimalResponse(line);
                 if(animal !=null){
