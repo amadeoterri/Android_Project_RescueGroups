@@ -16,13 +16,7 @@ public class AnimalFavoritesDB extends SchemaHelper
     public long addFavorite(Animal animal){
         ContentValues cv = new ContentValues();
         cv.put(AnimalFavoritesTabel.ANIMAL_ID,animal.getAnimalId());
-        cv.put(AnimalFavoritesTabel.ANIMAL_NAME,animal.getAnimalName());
-        cv.put(AnimalFavoritesTabel.ANIMAL_SPECIES,animal.getAnimalSpecies());
-        cv.put(AnimalFavoritesTabel.ANIMAL_BREED,animal.getAnimalBreed());
-        cv.put(AnimalFavoritesTabel.ANIMAL_SEX,animal.getAnimalSex());
-        cv.put(AnimalFavoritesTabel.ANIMAL_BIRTHDATE,animal.getAnimalBirthDate());
-        cv.put(AnimalFavoritesTabel.ANIMAL_IMAGE,animal.getAnimalImageUrl());
-        cv.put(AnimalFavoritesTabel.ANIMAL_DESC,animal.getAnimalDescription());
+        cv.put(AnimalFavoritesTabel.ANIMAL_FAVORITED,1);
 
         SQLiteDatabase sd = getWritableDatabase();
 
@@ -31,6 +25,21 @@ public class AnimalFavoritesDB extends SchemaHelper
 
     public Cursor getFavorites(){
         SQLiteDatabase sd = getWritableDatabase();
-        return sd.rawQuery("SELECT * FROM " + AnimalFavoritesTabel.TABEL_NAAM,null);
+        /*return sd.rawQuery("SELECT "+ AnimalTabel.KEY_ID + ","
+                                        + AnimalTabel.ANIMAL_ID + ","
+                                        + AnimalTabel.ANIMAL_NAME + ","
+                                        + AnimalTabel.ANIMAL_SPECIES + ","
+                                        + AnimalTabel.ANIMAL_BREED + ","
+                                        + AnimalTabel.ANIMAL_BIRTHDATE + ","
+                                        + AnimalTabel.ANIMAL_IMAGE + ","
+                                        + AnimalTabel.ANIMAL_DESC
+                                        + " FROM " + AnimalFavoritesTabel.TABEL_NAAM + " INNER JOIN " + AnimalTabel.TABEL_NAAM
+                                        + " ON " + AnimalTabel.TABEL_NAAM + "." + AnimalTabel.ANIMAL_ID + " = " + AnimalFavoritesTabel.TABEL_NAAM + "." + AnimalFavoritesTabel.ANIMAL_ID
+                                        + " WHERE " + AnimalFavoritesTabel.ANIMAL_FAVORITED + " = 1" ,null);*/
+
+        return sd.rawQuery("SELECT * FROM " + AnimalTabel.TABEL_NAAM + " , " + AnimalFavoritesTabel.TABEL_NAAM
+                + " WHERE " + AnimalTabel.TABEL_NAAM + "." + AnimalTabel.ANIMAL_ID + " = " + AnimalFavoritesTabel.TABEL_NAAM + "." + AnimalFavoritesTabel.ANIMAL_ID
+                + " AND " + AnimalFavoritesTabel.ANIMAL_FAVORITED + " = 1"
+                ,null);
     }
 }

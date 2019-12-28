@@ -39,10 +39,6 @@ public class AnimalActivity extends AppCompatActivity {
 
         final ListView listView = findViewById(R.id.listViewAnimals);
 
-        //asynctask om elementen uit json file te halen
-        //listview meegeven
-        new AnimalsAsyncTask(this).execute();
-
         AnimalDB sh = new AnimalDB(this);
         Cursor cursor = sh.getAnimalsWithParams(choice);
         animalList = new ArrayList<>();
@@ -50,7 +46,7 @@ public class AnimalActivity extends AppCompatActivity {
         if (cursor.moveToFirst()) {
             while (!cursor.isAfterLast()) {
 
-                int id = cursor.getInt(1);
+                String id = cursor.getString(1);
                 String naam = cursor.getString(2);
                 String species = cursor.getString(3);
                 String breed = cursor.getString(4);

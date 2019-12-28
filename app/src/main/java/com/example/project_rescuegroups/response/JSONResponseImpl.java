@@ -27,7 +27,7 @@ public class JSONResponseImpl {
             for (int idx = 0; idx < animals.length(); idx++) {
                 JSONObject animal = (JSONObject) animals.get(idx);
                 //id uithalen
-                int id = animal.getInt("animalID");
+                String id = animal.getString("animalID");
                 //naam uithalen
                 String name = animal.getString("name");
                 //species uithalen

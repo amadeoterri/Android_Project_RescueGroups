@@ -39,7 +39,7 @@ public class FavoritesActivity extends AppCompatActivity {
         if (cursor.moveToFirst()) {
             while (!cursor.isAfterLast()) {
 
-                int id = cursor.getInt(1);
+                String id = cursor.getString(1);
                 String naam = cursor.getString(2);
                 String species = cursor.getString(3);
                 String breed = cursor.getString(4);

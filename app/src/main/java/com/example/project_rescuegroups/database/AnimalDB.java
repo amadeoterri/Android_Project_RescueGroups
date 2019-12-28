@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.project_rescuegroups.model.Animal;
 import com.example.project_rescuegroups.util.ChoiceParamData;
@@ -15,19 +16,27 @@ public class AnimalDB extends SchemaHelper{
     }
 
     public long addAnimals(Animal animal){
-        ContentValues cv = new ContentValues();
-        cv.put(AnimalTabel.ANIMAL_ID,animal.getAnimalId());
-        cv.put(AnimalTabel.ANIMAL_NAME,animal.getAnimalName());
-        cv.put(AnimalTabel.ANIMAL_SPECIES,animal.getAnimalSpecies());
-        cv.put(AnimalTabel.ANIMAL_BREED,animal.getAnimalBreed());
-        cv.put(AnimalTabel.ANIMAL_SEX,animal.getAnimalSex());
-        cv.put(AnimalTabel.ANIMAL_BIRTHDATE,animal.getAnimalBirthDate());
-        cv.put(AnimalTabel.ANIMAL_IMAGE,animal.getAnimalImageUrl());
-        cv.put(AnimalTabel.ANIMAL_DESC,animal.getAnimalDescription());
+        if(!(hasObject(animal.getAnimalId()))) {
 
-        SQLiteDatabase sd = getWritableDatabase();
 
-        return sd.insert(AnimalTabel.TABEL_NAAM,AnimalTabel.ANIMAL_NAME,cv);
+            ContentValues cv = new ContentValues();
+            cv.put(AnimalTabel.ANIMAL_ID, animal.getAnimalId());
+            cv.put(AnimalTabel.ANIMAL_NAME, animal.getAnimalName());
+            cv.put(AnimalTabel.ANIMAL_SPECIES, animal.getAnimalSpecies());
+            cv.put(AnimalTabel.ANIMAL_BREED, animal.getAnimalBreed());
+            cv.put(AnimalTabel.ANIMAL_SEX, animal.getAnimalSex());
+            cv.put(AnimalTabel.ANIMAL_BIRTHDATE, animal.getAnimalBirthDate());
+            cv.put(AnimalTabel.ANIMAL_IMAGE, animal.getAnimalImageUrl());
+            cv.put(AnimalTabel.ANIMAL_DESC, animal.getAnimalDescription());
+
+            SQLiteDatabase sd = getWritableDatabase();
+
+            return sd.insert(AnimalTabel.TABEL_NAAM, AnimalTabel.ANIMAL_NAME, cv);
+        }
+        else
+        {
+            return 0;
+        }
     }
 
     public Cursor getAllAnimals(){
@@ -64,5 +73,30 @@ public class AnimalDB extends SchemaHelper{
         String[] whereArgs = new String []{species};
 
         return sd.query(true,AnimalTabel.TABEL_NAAM,new String[]{AnimalTabel.ANIMAL_BREED},whereClause,whereArgs,AnimalTabel.ANIMAL_BREED,null,null,null);
+    }
+
+    public boolean hasObject(String id) {
+        SQLiteDatabase db = getWritableDatabase();
+        String selectString = "SELECT * FROM " + AnimalTabel.TABEL_NAAM + " WHERE " + AnimalTabel.ANIMAL_ID + " =?";
+
+        Cursor cursor = db.rawQuery(selectString, new String[] {id});
+
+        boolean hasObject = false;
+        if(cursor.moveToFirst()){
+            hasObject = true;
+            int count = 0;
+            while(cursor.moveToNext()){
+                count++;
+            }
+            //here, count is records found
+            Log.d("recordfound", String.format("%d records found", count));
+
+            //endregion
+
+        }
+
+        cursor.close();
+        db.close();
+        return hasObject;
     }
 }

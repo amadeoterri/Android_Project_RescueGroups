@@ -4,7 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Animal implements Parcelable {
-    private int animalId;
+    private String animalId;
     private String animalName;
     private String animalSpecies;
     private String animalBreed;
@@ -13,7 +13,7 @@ public class Animal implements Parcelable {
     private String animalImageUrl;
     private String animalDescription;
 
-    public Animal(int animalId, String animalName, String animalSpecies, String animalBreed, String animalSex, String animalBirthDate, String animalImageUrl, String animalDescription) {
+    public Animal(String animalId, String animalName, String animalSpecies, String animalBreed, String animalSex, String animalBirthDate, String animalImageUrl, String animalDescription) {
         this.animalId = animalId;
         this.animalName = animalName;
         this.animalSpecies = animalSpecies;
@@ -26,7 +26,7 @@ public class Animal implements Parcelable {
     }
 
     protected Animal(Parcel in) {
-        animalId = in.readInt();
+        animalId = in.readString();
         animalName = in.readString();
         animalSpecies = in.readString();
         animalBreed = in.readString();
@@ -48,11 +48,11 @@ public class Animal implements Parcelable {
         }
     };
 
-    public int getAnimalId() {
+    public String getAnimalId() {
         return animalId;
     }
 
-    public void setAnimalId(int animalId) {
+    public void setAnimalId(String animalId) {
         this.animalId = animalId;
     }
 
@@ -119,7 +119,7 @@ public class Animal implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(animalId);
+        dest.writeString(animalId);
         dest.writeString(animalName);
         dest.writeString(animalSpecies);
         dest.writeString(animalBreed);

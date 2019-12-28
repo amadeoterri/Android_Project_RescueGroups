@@ -20,7 +20,7 @@ public class JSONResponseImplSingle {
         try {
             JSONObject animal = (JSONObject) new JSONTokener(data).nextValue();
                 //id uithalen
-                int id = animal.getInt("animalID");
+                String id = animal.getString("animalID");
                 //naam uithalen
                 String name = animal.getString("name");
                 //species uithalen
