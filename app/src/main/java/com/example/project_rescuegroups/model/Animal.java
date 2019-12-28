@@ -3,6 +3,8 @@ package com.example.project_rescuegroups.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.example.project_rescuegroups.R;
+
 public class Animal implements Parcelable {
     private String animalId;
     private String animalName;
@@ -12,6 +14,8 @@ public class Animal implements Parcelable {
     private String animalBirthDate;
     private String animalImageUrl;
     private String animalDescription;
+    private int imgFavorite;
+    private int[] imgIds = {R.drawable.unfavorite,R.drawable.favorite};
 
     public Animal(String animalId, String animalName, String animalSpecies, String animalBreed, String animalSex, String animalBirthDate, String animalImageUrl, String animalDescription) {
         this.animalId = animalId;
@@ -22,6 +26,7 @@ public class Animal implements Parcelable {
         this.animalBirthDate = animalBirthDate;
         this.animalImageUrl = animalImageUrl;
         this.animalDescription = animalDescription;
+        this.imgFavorite = imgIds[0];
 
     }
 
@@ -110,6 +115,18 @@ public class Animal implements Parcelable {
 
     public void setAnimalDescription(String animalDescription) {
         this.animalDescription = animalDescription;
+    }
+
+    public int getImgFavorite() {
+        return imgFavorite;
+    }
+
+    public void setImgFavorite(int imgFavorite) {
+        this.imgFavorite = imgFavorite;
+    }
+
+    public int[] getImgIds() {
+        return imgIds;
     }
 
     @Override

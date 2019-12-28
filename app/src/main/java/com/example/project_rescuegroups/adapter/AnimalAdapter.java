@@ -1,114 +1,131 @@
 package com.example.project_rescuegroups.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.project_rescuegroups.AnimalDetail;
 import com.example.project_rescuegroups.R;
-import com.example.project_rescuegroups.database.AnimalFavoritesDB;
 import com.example.project_rescuegroups.model.Animal;
 import com.google.android.material.button.MaterialButton;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class AnimalAdapter extends ArrayAdapter<Animal> {
+public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.ViewHolder>  {
 
-    private Context context;
     private List<Animal> animalList;
-    boolean isEnable = false;
+    private OnItemClickListener mListener;
+    Context context;
 
-    public AnimalAdapter(Context context,List<Animal> animalList) {
-        super(context, R.layout.animals_list_item,animalList);
-        this.context = context;
+    public interface OnItemClickListener{
+        void onItemClick(int position);
+        void onFavoriteClick(int position);
+        void onDetailClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener mListener) {
+        this.mListener = mListener;
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        public ImageView imageView;
+        public TextView textViewName;
+        public TextView textViewInfo;
+        public MaterialButton btnDetail;
+        public ImageView favorite;
+
+        public ViewHolder(View itemView,final OnItemClickListener listener) {
+            super(itemView);
+            imageView = itemView.findViewById(R.id.imgAnimal);
+            textViewName = itemView.findViewById(R.id.tvAnimalName);
+            textViewInfo = itemView.findViewById(R.id.tvAnimalInfo);
+            favorite = itemView.findViewById(R.id.btn_heart);
+            btnDetail = itemView.findViewById(R.id.btnShowDetail);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(listener != null){
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION){
+                            listener.onItemClick(position);
+                        }
+                    }
+
+
+                }
+            });
+
+            favorite.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(listener != null){
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION){
+                            //favorite.setImageDrawable(ContextCompat.getDrawable(v.getContext(),R.drawable.favorite));
+                            listener.onFavoriteClick(position);
+                        }
+                    }
+                }
+            });
+
+            btnDetail.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(listener != null){
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION){
+                            listener.onDetailClick(position);
+                        }
+                    }
+                }
+            });
+        }
+    }
+
+    public AnimalAdapter(List<Animal> animalList,Context context) {
         this.animalList = animalList;
+        this.context = context;
     }
 
     @NonNull
     @Override
-    public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View convertView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.animals_list_item,parent,false);
+        ViewHolder evh = new ViewHolder(convertView, mListener);
+        return evh;
+    }
 
-        //als convertView null is een nieuwe View maken, anders hergebruiken
-        if(convertView == null){
-            LayoutInflater layoutInflater = LayoutInflater.from(context);
-            convertView = layoutInflater.inflate(R.layout.animals_list_item,parent,false);
-        }
-
+    @Override
+    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int position) {
         final Animal animal = animalList.get(position);
-        ImageView imageView = convertView.findViewById(R.id.imgAnimal);
-        TextView textViewName = convertView.findViewById(R.id.tvAnimalName);
-        TextView textViewInfo = convertView.findViewById(R.id.tvAnimalInfo);
-        final ImageButton favorite = convertView.findViewById(R.id.btn_heart);
 
-        Picasso.get().load(animal.getAnimalImageUrl()).into(imageView);
-        textViewName.setText(animal.getAnimalName());
-        textViewInfo.setText("Gender: " + animal.getAnimalSex() + "\n"
-                                + "Breed: " + animal.getAnimalBreed() + "\n"
-                                + "Birthdate: " + animal.getAnimalBirthDate());
-        AnimalFavoritesDB sh = new AnimalFavoritesDB(context);
-        Cursor cursor = sh.getFavorites();
-        boolean isFavorited = false;
-        if (cursor.moveToFirst()) {
-            while (!cursor.isAfterLast()) {
-                String id = cursor.getString(1);
-                int favorited = cursor.getInt(11);
-                String currentAnimalId = animal.getAnimalId();
-                if(id.equals(currentAnimalId) && favorited == 1){
-                    isFavorited = true;
-                    favorite.setImageDrawable(ContextCompat.getDrawable(getContext(),R.drawable.favorite));
-                    break;
-                }
-                cursor.moveToNext();
-            }
+        Picasso.get().load(animal.getAnimalImageUrl()).into(viewHolder.imageView);
+        viewHolder.textViewName.setText(animal.getAnimalName());
+        viewHolder.textViewInfo.setText("Gender: " + animal.getAnimalSex() + "\n"
+                + "Breed: " + animal.getAnimalBreed() + "\n"
+                + "Birthdate: " + animal.getAnimalBirthDate());
+        int isFavorited = animal.getImgFavorite();
+        if(isFavorited == animal.getImgIds()[1]) {
+            viewHolder.favorite.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.favorite));
+        }
+        else{
+            viewHolder.favorite.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.unfavorite));
         }
 
-        final boolean finalIsFavorited = isFavorited;
-        favorite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(!finalIsFavorited) {
-                    favorite.setImageDrawable(ContextCompat.getDrawable(getContext(),R.drawable.favorite));
-                    addDbFavorite(animal);
-                }
-                else{
-                    favorite.setImageDrawable(ContextCompat.getDrawable(getContext(),R.drawable.unfavorite));
-                    removeDBFavorite(animal);
-                }
-            }
-        });
-
-        MaterialButton btnDetail = convertView.findViewById(R.id.btnShowDetail);
-        btnDetail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context,AnimalDetail.class);
-                intent.putExtra("animal",animal);
-                context.startActivity(intent);
-            }
-        });
-        return convertView;
     }
 
-    private void addDbFavorite(Animal animal_favorite){
-        AnimalFavoritesDB sh = new AnimalFavoritesDB(context);
-        sh.addFavorite(animal_favorite);
+    @Override
+    public int getItemCount() {
+        return animalList.size();
     }
-
-    private void removeDBFavorite(Animal animal_favorite){
-        AnimalFavoritesDB sh = new AnimalFavoritesDB(context);
-        sh.removeFavorite(animal_favorite);
-    }
-
 }
