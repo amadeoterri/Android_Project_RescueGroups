@@ -32,7 +32,6 @@ public class AnimalDB extends SchemaHelper{
 
     public Cursor getAllAnimals(){
         SQLiteDatabase sd = getWritableDatabase();
-        /*return sd.query(AnimalTabel.TABEL_NAAM,resultColumn,null,null,null,null,null,null);*/
         return sd.rawQuery("SELECT * FROM " + AnimalTabel.TABEL_NAAM,null);
     }
 
@@ -49,28 +48,14 @@ public class AnimalDB extends SchemaHelper{
             return sd.rawQuery("SELECT * FROM " + AnimalTabel.TABEL_NAAM + " WHERE " + AnimalTabel.ANIMAL_SPECIES + " =  ? AND "  + AnimalTabel.ANIMAL_SEX + " = ? " + "GROUP BY " + AnimalTabel.ANIMAL_NAME,new String[]{species,sex});
         }
         else if(!breed.equals("All") && !sex.equals("All")){
-            return sd.rawQuery("SELECT * FROM " + AnimalTabel.TABEL_NAAM + " WHERE " + AnimalTabel.ANIMAL_SPECIES + " =  ? AND " + AnimalTabel.ANIMAL_BREED + " = ? AND "  + AnimalTabel.ANIMAL_SEX + " = ? "  + "GROUP BY " + AnimalTabel.ANIMAL_NAME,new String[]{species,breed});
+            return sd.rawQuery("SELECT * FROM " + AnimalTabel.TABEL_NAAM + " WHERE " + AnimalTabel.ANIMAL_SPECIES + " =  ? AND " + AnimalTabel.ANIMAL_BREED + " = ? AND "  + AnimalTabel.ANIMAL_SEX + " = ? "  + "GROUP BY " + AnimalTabel.ANIMAL_NAME,new String[]{species,breed,sex});
         }
         else if(!breed.equals("All") && sex.equals("All")){
             return sd.rawQuery("SELECT * FROM " + AnimalTabel.TABEL_NAAM + " WHERE " + AnimalTabel.ANIMAL_SPECIES + " =  ? AND " + AnimalTabel.ANIMAL_BREED + " = ? " + "GROUP BY " + AnimalTabel.ANIMAL_NAME,new String[]{species,breed});
         }
         else{
-            return null;
+            return getAllAnimals();
         }
-
-        /*SQLiteDatabase sd = getReadableDatabase();
-        String whereClause = AnimalTabel.ANIMAL_SPECIES  + " = ?";
-        String[] whereArgs = new String[]{choice.getsChoiceSpecies(),choice.getsChoiceBreed()};
-
-        return sd.query(true,AnimalTabel.TABEL_NAAM,new String[]{AnimalTabel.ANIMAL_BREED},whereClause,whereArgs,AnimalTabel.ANIMAL_NAME,null,null,null);
-    */
-    }
-
-    public Cursor getAnimalsUniqueSpecies(){
-        /*String[] resultColumn = {AnimalTabel.ANIMAL_ID,AnimalTabel.ANIMAL_NAME,AnimalTabel.ANIMAL_SPECIES,AnimalTabel.ANIMAL_BREED,
-                AnimalTabel.ANIMAL_SEX,AnimalTabel.ANIMAL_BIRTHDATE,AnimalTabel.ANIMAL_IMAGE,AnimalTabel.ANIMAL_DESC};*/
-        SQLiteDatabase sd = getReadableDatabase();
-        return sd.query(true,AnimalTabel.TABEL_NAAM,new String[]{AnimalTabel.ANIMAL_SPECIES},null,null,AnimalTabel.ANIMAL_SPECIES,null,null,null);
     }
 
     public Cursor getAnimalsUniqueBreed(String species){

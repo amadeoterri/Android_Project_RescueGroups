@@ -15,6 +15,7 @@
     <string name="rbtDogs">Dogs</string>
     <string name="searchChooseSex">Choose Sex</string>
     <string name="animalListShowDetails">Details</string>
+    <string name="Title_FavoritesActivity">Your favorites: </string>
 
     <string-array name="sex_array">
         <item>All</item>

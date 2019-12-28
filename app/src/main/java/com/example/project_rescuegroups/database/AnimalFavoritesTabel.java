@@ -6,9 +6,15 @@ package com.example.project_rescuegroups.database;
 
 public interface AnimalFavoritesTabel {
     //TODO velden invullen
-    String ID ="_id";
-    String ANIMAL_ID="_animalID";
-    String ANIMAL_NAME = "_animalName";
-    String TABEL_NAAM = "tblAnimalFavorite";
     String KEY_ID = "Id" ;
+    String ANIMAL_ID="animalId";
+    String ANIMAL_NAME = "animalName";
+    String ANIMAL_BREED = "animalBreed";
+    String ANIMAL_SPECIES ="animalSpecies";
+    String ANIMAL_SEX ="animalSex";
+    String ANIMAL_BIRTHDATE ="animalBirthDate";
+    String ANIMAL_IMAGE ="animalImageUrl";
+    String ANIMAL_DESC ="animalDescription";
+    String TABEL_NAAM = "tblAnimalFavorite";
+
 }

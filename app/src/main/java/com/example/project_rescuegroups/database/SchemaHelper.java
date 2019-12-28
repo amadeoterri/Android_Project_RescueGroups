@@ -17,7 +17,7 @@ import java.util.ArrayList;
  */
 
 public class SchemaHelper extends SQLiteOpenHelper {
-    private final static String DATABASE_NAAM = "Animalss";
+    private final static String DATABASE_NAAM = "Animals";
     private static final int DATABASE_VERSIE = 5;
 
     public SchemaHelper(Context context) {
@@ -46,7 +46,13 @@ public class SchemaHelper extends SQLiteOpenHelper {
                 + " (" + AnimalFavoritesTabel.KEY_ID
                 + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + AnimalFavoritesTabel.ANIMAL_ID + " TEXT,"
-                + AnimalFavoritesTabel.ANIMAL_NAME + " TEXT);"
+                + AnimalFavoritesTabel.ANIMAL_NAME + " TEXT,"
+                + AnimalFavoritesTabel.ANIMAL_SPECIES + " TEXT,"
+                + AnimalFavoritesTabel.ANIMAL_BREED + " TEXT,"
+                + AnimalFavoritesTabel.ANIMAL_SEX + " TEXT,"
+                + AnimalFavoritesTabel.ANIMAL_BIRTHDATE + " TEXT,"
+                + AnimalFavoritesTabel.ANIMAL_IMAGE + " TEXT,"
+                + AnimalFavoritesTabel.ANIMAL_DESC + " TEXT);"
         );
 
     }

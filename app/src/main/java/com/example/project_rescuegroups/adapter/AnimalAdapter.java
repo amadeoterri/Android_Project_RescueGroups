@@ -1,6 +1,5 @@
 package com.example.project_rescuegroups.adapter;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -9,9 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -90,7 +87,6 @@ public class AnimalAdapter extends ArrayAdapter<Animal> {
     private void addDbFavorite(Animal animal_favorite){
         AnimalFavoritesDB sh = new AnimalFavoritesDB(context);
         sh.addFavorite(animal_favorite);
-        Toast.makeText(context,animal_favorite.toString(),Toast.LENGTH_LONG).show();
     }
 
 }
