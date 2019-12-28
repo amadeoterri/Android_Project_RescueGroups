@@ -2,6 +2,7 @@ package com.example.project_rescuegroups.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +50,6 @@ public class AnimalAdapter extends ArrayAdapter<Animal> {
         ImageView imageView = convertView.findViewById(R.id.imgAnimal);
         TextView textViewName = convertView.findViewById(R.id.tvAnimalName);
         TextView textViewInfo = convertView.findViewById(R.id.tvAnimalInfo);
-
         final ImageButton favorite = convertView.findViewById(R.id.btn_heart);
 
         Picasso.get().load(animal.getAnimalImageUrl()).into(imageView);
@@ -57,18 +57,35 @@ public class AnimalAdapter extends ArrayAdapter<Animal> {
         textViewInfo.setText("Gender: " + animal.getAnimalSex() + "\n"
                                 + "Breed: " + animal.getAnimalBreed() + "\n"
                                 + "Birthdate: " + animal.getAnimalBirthDate());
+        AnimalFavoritesDB sh = new AnimalFavoritesDB(context);
+        Cursor cursor = sh.getFavorites();
+        boolean isFavorited = false;
+        if (cursor.moveToFirst()) {
+            while (!cursor.isAfterLast()) {
+                String id = cursor.getString(1);
+                int favorited = cursor.getInt(11);
+                String currentAnimalId = animal.getAnimalId();
+                if(id.equals(currentAnimalId) && favorited == 1){
+                    isFavorited = true;
+                    favorite.setImageDrawable(ContextCompat.getDrawable(getContext(),R.drawable.favorite));
+                    break;
+                }
+                cursor.moveToNext();
+            }
+        }
 
+        final boolean finalIsFavorited = isFavorited;
         favorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isEnable) {
+                if(!finalIsFavorited) {
                     favorite.setImageDrawable(ContextCompat.getDrawable(getContext(),R.drawable.favorite));
                     addDbFavorite(animal);
                 }
                 else{
                     favorite.setImageDrawable(ContextCompat.getDrawable(getContext(),R.drawable.unfavorite));
+                    removeDBFavorite(animal);
                 }
-                isEnable = !isEnable;
             }
         });
 
@@ -87,6 +104,11 @@ public class AnimalAdapter extends ArrayAdapter<Animal> {
     private void addDbFavorite(Animal animal_favorite){
         AnimalFavoritesDB sh = new AnimalFavoritesDB(context);
         sh.addFavorite(animal_favorite);
+    }
+
+    private void removeDBFavorite(Animal animal_favorite){
+        AnimalFavoritesDB sh = new AnimalFavoritesDB(context);
+        sh.removeFavorite(animal_favorite);
     }
 
 }
