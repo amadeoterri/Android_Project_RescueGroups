@@ -18,7 +18,6 @@ public class AnimalDB extends SchemaHelper {
     public long addAnimals(Animal animal) {
         if (!(hasObject(animal.getAnimalId()))) {
 
-
             ContentValues cv = new ContentValues();
             cv.put(AnimalTabel.ANIMAL_ID, animal.getAnimalId());
             cv.put(AnimalTabel.ANIMAL_NAME, animal.getAnimalName());

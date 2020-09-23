@@ -6,7 +6,6 @@
     android:orientation="vertical"
     android:layout_margin="16dp"
     tools:context=".FavoritesActivity">
-
     <TextView
         android:id="@+id/TitleFavorites"
         android:layout_width="match_parent"
@@ -17,7 +16,6 @@
         android:text="@string/Title_FavoritesActivity"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
         android:textColor="?colorPrimary" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/favoriteRecyclerView"
         android:layout_width="match_parent"

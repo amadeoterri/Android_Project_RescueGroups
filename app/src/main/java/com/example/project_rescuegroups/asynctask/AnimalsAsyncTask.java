@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import com.example.project_rescuegroups.database.AnimalDB;
 import com.example.project_rescuegroups.model.Animal;
 import com.example.project_rescuegroups.response.JSONResponseImplSingle;
+import com.example.project_rescuegroups.util.DBParamData;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -39,9 +40,11 @@ public class AnimalsAsyncTask extends AsyncTask<String, Void, List<Animal>> {
     protected void onPostExecute(List<Animal> animals) {
         super.onPostExecute(animals);
         AnimalDB sh = new AnimalDB(context);
-        for (Animal animal : animals) {
+/*        for (Animal animal : animals) {
             sh.addAnimals(animal);
-        }
+        }*/
+        DBParamData dbparam = new DBParamData(sh, animals);
+        new DBAsyncTask().execute(dbparam);
     }
 
     public List<Animal> loadJSONFromAsset(String filename) {

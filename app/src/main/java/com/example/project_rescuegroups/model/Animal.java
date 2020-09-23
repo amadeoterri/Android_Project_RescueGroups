@@ -30,7 +30,6 @@ public class Animal implements Parcelable {
         this.animalDescription = animalDescription;
         this.animalOrgID = animalOrgID;
         this.imgFavorite = imgIds[0];
-
     }
 
     protected Animal(Parcel in) {
@@ -43,6 +42,7 @@ public class Animal implements Parcelable {
         animalImageUrl = in.readString();
         animalDescription = in.readString();
         animalOrgID = in.readString();
+        imgFavorite = imgIds[0];
     }
 
     public static final Creator<Animal> CREATOR = new Creator<Animal>() {
@@ -120,5 +120,6 @@ public class Animal implements Parcelable {
         dest.writeString(animalBirthDate);
         dest.writeString(animalImageUrl);
         dest.writeString(animalDescription);
+        dest.writeInt(imgFavorite);
     }
 }
