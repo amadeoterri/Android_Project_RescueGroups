@@ -1,22 +1,19 @@
 package com.example.project_rescuegroups;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.project_rescuegroups.asynctask.AnimalsAsyncTask;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
+    public boolean show = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        /*new AnimalsAsyncTask(this).execute();*/
 
         final Button btnAnimalList = findViewById(R.id.btnShowAnimals);
         final Button btnOrganizationList = findViewById(R.id.btnShowOrganizations);
@@ -48,4 +45,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
 }

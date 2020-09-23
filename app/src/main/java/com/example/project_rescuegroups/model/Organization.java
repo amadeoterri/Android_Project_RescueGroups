@@ -1,8 +1,10 @@
 package com.example.project_rescuegroups.model;
 
-public class Organization
-{
-    private int organizationID;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Organization implements Parcelable {
+    private String organizationID;
     private String organizationName;
     private String organizationAddress;
     private String organizationCity;
@@ -12,7 +14,7 @@ public class Organization
     private String organizationPhone;
     private String organizationEmail;
 
-    public Organization(int organizationID, String organizationName, String organizationAddress, String organizationCity, String organizationState, String organizationZip, String organizationCountry, String organizationPhone, String organizationEmail) {
+    public Organization(String organizationID, String organizationName, String organizationAddress, String organizationCity, String organizationState, String organizationZip, String organizationCountry, String organizationPhone, String organizationEmail) {
         this.organizationID = organizationID;
         this.organizationName = organizationName;
         this.organizationAddress = organizationAddress;
@@ -24,11 +26,35 @@ public class Organization
         this.organizationEmail = organizationEmail;
     }
 
-    public int getOrganizationID() {
+    protected Organization(Parcel in) {
+        organizationID = in.readString();
+        organizationName = in.readString();
+        organizationAddress = in.readString();
+        organizationCity = in.readString();
+        organizationState = in.readString();
+        organizationZip = in.readString();
+        organizationCountry = in.readString();
+        organizationPhone = in.readString();
+        organizationEmail = in.readString();
+    }
+
+    public static final Creator<Organization> CREATOR = new Creator<Organization>() {
+        @Override
+        public Organization createFromParcel(Parcel in) {
+            return new Organization(in);
+        }
+
+        @Override
+        public Organization[] newArray(int size) {
+            return new Organization[size];
+        }
+    };
+
+    public String getOrganizationID() {
         return organizationID;
     }
 
-    public void setOrganizationID(int organizationID) {
+    public void setOrganizationID(String organizationID) {
         this.organizationID = organizationID;
     }
 
@@ -94,5 +120,23 @@ public class Organization
 
     public void setOrganizationEmail(String organizationEmail) {
         this.organizationEmail = organizationEmail;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(organizationID);
+        dest.writeString(organizationName);
+        dest.writeString(organizationAddress);
+        dest.writeString(organizationCity);
+        dest.writeString(organizationState);
+        dest.writeString(organizationZip);
+        dest.writeString(organizationCountry);
+        dest.writeString(organizationPhone);
+        dest.writeString(organizationEmail);
     }
 }

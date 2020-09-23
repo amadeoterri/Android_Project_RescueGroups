@@ -2,21 +2,20 @@ package com.example.project_rescuegroups.asynctask;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.widget.ListView;
 
+import com.example.project_rescuegroups.database.OrganizationDB;
 import com.example.project_rescuegroups.model.Organization;
-import com.example.project_rescuegroups.response.JSONResponseImpl;
-import com.example.project_rescuegroups.adapter.OrganizationAdapter;
+import com.example.project_rescuegroups.response.JSONResponseImplSingle;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 
-public class OrganizationAsyncTask extends AsyncTask<ListView, Void, List<Organization>> {
+public class OrganizationAsyncTask extends AsyncTask<Void, Void, List<Organization>> {
 
-    private ListView listView;
     Context context;
 
     public OrganizationAsyncTask(Context myContext) {
@@ -24,53 +23,42 @@ public class OrganizationAsyncTask extends AsyncTask<ListView, Void, List<Organi
     }
 
     @Override
-    protected List<Organization> doInBackground(ListView... listViews) {
-        listView = listViews[0];
-        String data;
-        try {
-            data = loadJSONFromAsset();
-            JSONResponseImpl responseImpl = new JSONResponseImpl();
-            return responseImpl.handleOrganizationResponse(data);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
+    protected List<Organization> doInBackground(Void... voids) {
+        List<Organization> organizationList = loadJSONFromAsset();
+        return organizationList;
     }
 
     @Override
     protected void onPostExecute(List<Organization> organizations) {
         super.onPostExecute(organizations);
-        OrganizationAdapter organizationAdapter = new OrganizationAdapter(listView.getContext(), organizations);
-        listView.setAdapter(organizationAdapter);
+        OrganizationDB sh = new OrganizationDB((context));
+        if (organizations != null) {
+            for (Organization org : organizations) {
+                sh.addOrganizations(org);
+            }
+        }
+
     }
 
     //json file uitlezen (eerst omzetten naar ander json format)
-    public String loadJSONFromAsset() {
-        StringBuilder text = new StringBuilder();
+    public List<Organization> loadJSONFromAsset() {
+        List<Organization> organizations = new ArrayList<>();
         try {
             InputStream is = context.getAssets().open("organizations.json");
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
             String line = "";
-            int counter = 1;
-            text.append("{\"organizations\":");
-            text.append("[");
             while (((line = br.readLine()) != null)
-                    /*&& (counter < 300)*/
             ) {
-                text.append(line);
-                /*if(counter <299) {
-                    text.append(",");
-                }*/
-                text.append(",");
-                counter++;
+                JSONResponseImplSingle responseImpl = new JSONResponseImplSingle();
+                Organization org = responseImpl.handleOrganizationResponse(line);
+                if (org != null) {
+                    organizations.add(org);
+                }
             }
-            //laatste komma deleten
-            text.substring(0, text.length() - 1);
-            text.append("]}");
+            return organizations;
         } catch (IOException ex) {
             ex.printStackTrace();
             return null;
         }
-        return text.toString();
     }
 }

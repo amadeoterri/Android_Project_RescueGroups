@@ -7,6 +7,7 @@ public class SearchParamData {
     private String sSpinnerId;
     private String sRadioSelection;
 
+
     public SearchParamData(Spinner spinner, String sSpinnerId, String sRadioSelection) {
         this.spinner = spinner;
         this.sSpinnerId = sSpinnerId;

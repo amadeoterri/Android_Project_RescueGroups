@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -42,13 +41,14 @@
             android:text="@string/AnimalsTitleMain"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
             android:textColor="?colorPrimary"
-            android:layout_marginLeft="20dp"/>
+            android:layout_marginLeft="20dp" />
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:scaleType="fitXY"
-            android:src="@drawable/animalmain"></ImageView>
+            android:src="@drawable/animalmain" />
+
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnShowAnimals"
@@ -57,7 +57,7 @@
             android:text="@string/btnMain_showAnimals"
             android:layout_gravity="right"
             android:layout_marginRight="20dp"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp" />
         <TextView
             android:id="@+id/OrganizationsMain"
             android:layout_width="match_parent"
@@ -67,11 +67,12 @@
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
             android:textColor="?colorPrimary"
             android:layout_marginLeft="20dp"/>
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:scaleType="fitXY"
-            android:src="@drawable/organizationmain"></ImageView>
+            android:src="@drawable/organizationmain" />
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnShowOrganizations"
             android:layout_width="wrap_content"
@@ -89,11 +90,12 @@
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
             android:textColor="?colorPrimary"
             android:layout_marginLeft="20dp"/>
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:scaleType="fitXY"
-            android:src="@drawable/favoritesmain"></ImageView>
+            android:src="@drawable/favoritesmain" />
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnShowFavorites"
             android:layout_width="wrap_content"

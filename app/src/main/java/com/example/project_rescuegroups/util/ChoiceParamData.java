@@ -8,11 +8,13 @@ public class ChoiceParamData implements Parcelable {
     private String sChoiceSpecies;
     private String sChoiceBreed;
     private String sChoiceSex;
+    private String sChoiceState;
 
-    public ChoiceParamData(String sChoiceSpecies, String sChoiceBreed, String sChoiceSex) {
+    public ChoiceParamData(String sChoiceSpecies, String sChoiceBreed, String sChoiceSex, String sChoiceState) {
         this.sChoiceSpecies = sChoiceSpecies;
         this.sChoiceBreed = sChoiceBreed;
         this.sChoiceSex = sChoiceSex;
+        this.sChoiceState = sChoiceState;
     }
 
     public String getsChoiceSpecies() {
@@ -27,10 +29,15 @@ public class ChoiceParamData implements Parcelable {
         return sChoiceSex;
     }
 
+    public String getsChoiceState() {
+        return sChoiceState;
+    }
+
     protected ChoiceParamData(Parcel in) {
         sChoiceSpecies = in.readString();
         sChoiceBreed = in.readString();
         sChoiceSex = in.readString();
+        sChoiceState = in.readString();
     }
 
     public static final Creator<ChoiceParamData> CREATOR = new Creator<ChoiceParamData>() {
@@ -55,5 +62,6 @@ public class ChoiceParamData implements Parcelable {
         dest.writeString(sChoiceSpecies);
         dest.writeString(sChoiceBreed);
         dest.writeString(sChoiceSex);
+        dest.writeString(sChoiceState);
     }
 }

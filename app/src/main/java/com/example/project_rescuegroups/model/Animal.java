@@ -15,9 +15,11 @@ public class Animal implements Parcelable {
     private String animalImageUrl;
     private String animalDescription;
     private int imgFavorite;
-    private int[] imgIds = {R.drawable.unfavorite,R.drawable.favorite};
+    private int[] imgIds = {R.drawable.unfavorite, R.drawable.favorite};
 
-    public Animal(String animalId, String animalName, String animalSpecies, String animalBreed, String animalSex, String animalBirthDate, String animalImageUrl, String animalDescription) {
+    private String animalOrgID;
+
+    public Animal(String animalId, String animalName, String animalSpecies, String animalBreed, String animalSex, String animalBirthDate, String animalImageUrl, String animalDescription, String animalOrgID) {
         this.animalId = animalId;
         this.animalName = animalName;
         this.animalSpecies = animalSpecies;
@@ -26,6 +28,7 @@ public class Animal implements Parcelable {
         this.animalBirthDate = animalBirthDate;
         this.animalImageUrl = animalImageUrl;
         this.animalDescription = animalDescription;
+        this.animalOrgID = animalOrgID;
         this.imgFavorite = imgIds[0];
 
     }
@@ -39,6 +42,7 @@ public class Animal implements Parcelable {
         animalBirthDate = in.readString();
         animalImageUrl = in.readString();
         animalDescription = in.readString();
+        animalOrgID = in.readString();
     }
 
     public static final Creator<Animal> CREATOR = new Creator<Animal>() {
@@ -57,64 +61,32 @@ public class Animal implements Parcelable {
         return animalId;
     }
 
-    public void setAnimalId(String animalId) {
-        this.animalId = animalId;
-    }
-
     public String getAnimalName() {
         return animalName;
-    }
-
-    public void setAnimalName(String animalName) {
-        this.animalName = animalName;
     }
 
     public String getAnimalSpecies() {
         return animalSpecies;
     }
 
-    public void setAnimalSpecies(String animalSpecies) {
-        this.animalSpecies = animalSpecies;
-    }
-
     public String getAnimalBreed() {
         return animalBreed;
-    }
-
-    public void setAnimalBreed(String animalBreed) {
-        this.animalBreed = animalBreed;
     }
 
     public String getAnimalSex() {
         return animalSex;
     }
 
-    public void setAnimalSex(String animalSex) {
-        this.animalSex = animalSex;
-    }
-
     public String getAnimalBirthDate() {
         return animalBirthDate;
-    }
-
-    public void setAnimalBirthDate(String animalBirthDate) {
-        this.animalBirthDate = animalBirthDate;
     }
 
     public String getAnimalImageUrl() {
         return animalImageUrl;
     }
 
-    public void setAnimalImageUrl(String animalImageUrl) {
-        this.animalImageUrl = animalImageUrl;
-    }
-
     public String getAnimalDescription() {
         return animalDescription;
-    }
-
-    public void setAnimalDescription(String animalDescription) {
-        this.animalDescription = animalDescription;
     }
 
     public int getImgFavorite() {
@@ -127,6 +99,10 @@ public class Animal implements Parcelable {
 
     public int[] getImgIds() {
         return imgIds;
+    }
+
+    public String getAnimalOrgID() {
+        return animalOrgID;
     }
 
     @Override

@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingBottom="10dp">
+    android:layout_margin="8dp">
 
     <LinearLayout
         android:id="@+id/infoSection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="5dp"
+        android:layout_margin="4dp"
         android:layout_weight="1"
         android:orientation="vertical">
 
@@ -19,50 +17,81 @@
             android:id="@+id/tvOrganizationName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            />
+            android:textSize="24sp"
+            android:padding="4dp" />
+
         <TextView
             android:id="@+id/tvOrganizationAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            />
+            android:textSize="24sp"
+            android:padding="4dp" />
+
         <TextView
             android:id="@+id/tvOrganizationCity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            />
+            android:textSize="24sp"
+            android:padding="4dp" />
+
         <TextView
             android:id="@+id/tvOrganizationState"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            />
+            android:textSize="24sp"
+            android:padding="4dp" />
+
         <TextView
             android:id="@+id/tvOrganizationZip"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            />
+            android:textSize="24sp"
+            android:padding="4dp" />
+
         <TextView
             android:id="@+id/tvOrganizationCountry"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            />
+            android:textSize="24sp"
+            android:padding="4dp" />
+
         <TextView
             android:id="@+id/tvOrganizationPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            />
+            android:textSize="24sp"
+            android:padding="4dp" />
+
         <TextView
             android:id="@+id/tvOrganizationEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            />
+            android:textSize="24sp"
+            android:padding="4dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btnGeo"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/showonmap"
+                android:layout_margin="24dp"
+                android:layout_weight="1"></ImageButton>
+
+            <ImageButton
+                android:id="@+id/btnEmailOrg"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_email"
+                android:layout_margin="24dp"
+                android:tint="@color/colorPrimary"
+                android:background="@color/colorPrimaryDark"
+                android:layout_weight="1" />
+        </LinearLayout>
     </LinearLayout>
 
 

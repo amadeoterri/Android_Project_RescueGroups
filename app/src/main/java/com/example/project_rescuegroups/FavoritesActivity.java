@@ -1,17 +1,16 @@
 package com.example.project_rescuegroups;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.widget.GridView;
-import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 
-import com.example.project_rescuegroups.adapter.FavoritesGridAdapter;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.project_rescuegroups.adapter.FavoritesRecyclerAdapter;
 import com.example.project_rescuegroups.database.AnimalFavoritesDB;
-import com.example.project_rescuegroups.database.AnimalFavoritesTabel;
 import com.example.project_rescuegroups.model.Animal;
 
 import java.util.ArrayList;
@@ -19,7 +18,9 @@ import java.util.List;
 
 public class FavoritesActivity extends AppCompatActivity {
 
-    private GridView gridView;
+    private RecyclerView mRecyclerView;
+    private FavoritesRecyclerAdapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
     private List<Animal> animalFavoritesList;
     private Context context;
 
@@ -29,16 +30,41 @@ public class FavoritesActivity extends AppCompatActivity {
         this.context = this;
         setContentView(R.layout.activity_favorites);
 
+        makeFavoritesRecyclerView();
+        fillListFromDB();
+
+        mAdapter = new FavoritesRecyclerAdapter(this, animalFavoritesList);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
+
+        mAdapter.setOnItemClickListener(new FavoritesRecyclerAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Animal currentanimal = animalFavoritesList.get(position);
+                Intent intent = new Intent(context, AnimalDetail.class);
+                intent.putExtra("animal", currentanimal);
+                context.startActivity(intent);
+            }
+
+            @Override
+            public void onDeleteClick(int position) {
+                Animal deleteanimal = animalFavoritesList.remove(position);
+                mAdapter.notifyItemRemoved(position);
+                AnimalFavoritesDB sh = new AnimalFavoritesDB(context);
+                sh.removeFavorite(deleteanimal);
+            }
+        });
+
+    }
+
+    private void fillListFromDB() {
+
         AnimalFavoritesDB sh = new AnimalFavoritesDB(this);
-
-        gridView = (GridView) findViewById(R.id.gridFavorites);
-
         Cursor cursor = sh.getFavorites();
         animalFavoritesList = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
             while (!cursor.isAfterLast()) {
-
                 String id = cursor.getString(1);
                 String naam = cursor.getString(2);
                 String species = cursor.getString(3);
@@ -47,15 +73,18 @@ public class FavoritesActivity extends AppCompatActivity {
                 String birthdate = cursor.getString(6);
                 String imageurl = cursor.getString(7);
                 String desc = cursor.getString(8);
-                Animal animal = new Animal(id,naam,species,breed,sex,birthdate,imageurl,desc);
+                String animalOrgID = cursor.getString(9);
+                Animal animal = new Animal(id, naam, species, breed, sex, birthdate, imageurl, desc, animalOrgID);
                 animalFavoritesList.add(animal);
                 cursor.moveToNext();
 
             }
         }
+    }
 
-        FavoritesGridAdapter adapter  = new FavoritesGridAdapter(this,animalFavoritesList);
-        gridView.setAdapter(adapter);
-
+    private void makeFavoritesRecyclerView() {
+        mRecyclerView = findViewById(R.id.favoriteRecyclerView);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this);
     }
 }

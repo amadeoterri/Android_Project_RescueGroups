@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Project_RescueGroups</string>
+    <string name="app_name">RescueGroups</string>
     <string name="btnMain_showAnimals">Show</string>
     <string name="btnMain_showOrganizations">Show</string>
     <string name="btnShowFavorites">Show</string>
@@ -16,6 +16,7 @@
     <string name="searchChooseSex">Choose Sex</string>
     <string name="animalListShowDetails">Details</string>
     <string name="Title_FavoritesActivity">Your favorites: </string>
+    <string name="searchChooseLocation">Choose Location</string>
 
     <string-array name="sex_array">
         <item>All</item>
@@ -23,4 +24,246 @@
         <item>Female</item>
     </string-array>
 
+    <string-array name="breed_array_dog">
+        <item>All</item>
+        <item>Akita</item>
+        <item>American Bulldog</item>
+        <item>American Pit Bull Terrier</item>
+        <item>American Staffordshire Terrier</item>
+        <item>Anatolian Shepherd</item>
+        <item>Australian Cattle Dog</item>
+        <item>Australian Kelpie</item>
+        <item>Australian Shepherd</item>
+        <item>Australian Terrier</item>
+        <item>Basenji</item>
+        <item>Basset Hound</item>
+        <item>Beagle</item>
+        <item>Belgian Shepherd</item>
+        <item>Border Collie</item>
+        <item>Boston Terrier</item>
+        <item>Boxer</item>
+        <item>Brittany</item>
+        <item>Bull Terrier</item>
+        <item>Bulldog</item>
+        <item>Cairn Terrier</item>
+        <item>Cane Corso Mastiff</item>
+        <item>Carolina Dog</item>
+        <item>Catahoula Leopard Dog</item>
+        <item>Cattle Dog</item>
+        <item>Chesapeake Bay Retriever</item>
+        <item>Chihuahua</item>
+        <item>Chinese Shar-Pei</item>
+        <item>Chow Chow</item>
+        <item>Cocker Spaniel</item>
+        <item>Collie</item>
+        <item>Corgi</item>
+        <item>Dachshund</item>
+        <item>Dalmatian</item>
+        <item>Doberman</item>
+        <item>Dogo Argentino</item>
+        <item>Dutch Shepherd</item>
+        <item>English Bulldog</item>
+        <item>Feist</item>
+        <item>Flat-coated Retriever</item>
+        <item>German Shepherd</item>
+        <item>German Shorthaired Pointer</item>
+        <item>Golden Retriever</item>
+        <item>Great Dane</item>
+        <item>Great Pyrenees</item>
+        <item>Greyhound</item>
+        <item>Hound</item>
+        <item>Husky</item>
+        <item>Irish Setter</item>
+        <item>Irish Terrier</item>
+        <item>Irish Wolfhound</item>
+        <item>Jack Russel Terrier</item>
+        <item>Jack Russel Terrier</item>
+        <item>Labrador</item>
+        <item>Labrador Retriever</item>
+        <item>Maltese</item>
+        <item>Mastiff</item>
+        <item>Miniature Pinscher</item>
+        <item>Mountain Cur</item>
+        <item>Mouth Cur</item>
+        <item>Pit Bull Terrier</item>
+        <item>Plott Hound</item>
+        <item>Pointer</item>
+        <item>Pomeranian</item>
+        <item>Poodle</item>
+        <item>Pug</item>
+        <item>Rat Terrier</item>
+        <item>Red Heeler</item>
+        <item>Redbone Coonhound</item>
+        <item>Retriever</item>
+        <item>Rhodesian Ridgeback</item>
+        <item>Rottweiler</item>
+        <item>Saint Bernard</item>
+        <item>Schnauzer</item>
+        <item>Shar Pei</item>
+        <item>Shepherd</item>
+        <item>Shih Tzu</item>
+        <item>Siberian Husky</item>
+        <item>Spaniel</item>
+        <item>Spitz</item>
+        <item>Staffordshire Bull Terrier</item>
+        <item>Terrier</item>
+        <item>Treeing Walker Coonhound</item>
+        <item>Unknown</item>
+        <item>Vizsla</item>
+        <item>West Highland White Terrier Westie</item>
+        <item>Whippet</item>
+        <item>Wirehaired Fox Terrier</item>
+        <item>Yorkshire Terrier</item>
+
+    </string-array>
+
+    <string-array name="breed_array_cat">
+        <item>All</item>
+        <item>Abyssinian</item>
+        <item>American Shorthair</item>
+        <item>Applehead Siamese</item>
+        <item>Calico</item>
+        <item>Domestic Long Hair</item>
+        <item>Domestic Medium Hair</item>
+        <item>Domestic Short Hair</item>
+        <item>Havana</item>
+        <item>Maine Coon</item>
+        <item>Norwegian Forest Cat</item>
+        <item>Oriental Short Hair</item>
+        <item>Siamese</item>
+        <item>Tabby</item>
+        <item>Torbie</item>
+        <item>Tortoiseshell</item>
+        <item>Tuxedo</item>
+    </string-array>
+
+    <!--<string-array name="US_states">
+        <item>AL</item>
+        <item>AR</item>
+        <item>AZ</item>
+        <item>CA</item>
+        <item>CO</item>
+        <item>CT</item>
+        <item>DE</item>
+        <item>DC</item>
+        <item>FL</item>
+        <item>GA</item>
+        <item>HI</item>
+        <item>ID</item>
+        <item>IL</item>
+        <item>IN</item>
+        <item>IA</item>
+        <item>KS</item>
+        <item>KY</item>
+        <item>LA</item>
+        <item>ME</item>
+        <item>MD</item>
+        <item>MA</item>
+        <item>MI</item>
+        <item>MN</item>
+        <item>MS</item>
+        <item>MO</item>
+        <item>MT</item>
+        <item>NE</item>
+        <item>NV</item>
+        <item>NH</item>
+        <item>NJ</item>
+        <item>NM</item>
+        <item>NY</item>
+        <item>NC</item>
+        <item>ND</item>
+        <item>OH</item>
+        <item>OK</item>
+        <item>OR</item>
+        <item>PA</item>
+        <item>RI</item>
+        <item>SC</item>
+        <item>SD</item>
+        <item>TN</item>
+        <item>TX</item>
+        <item>UT</item>
+        <item>VT</item>
+        <item>VA</item>
+        <item>WA</item>
+        <item>WV</item>
+        <item>WI</item>
+        <item>WY</item>
+    </string-array>-->
+
+    <string-array name="us_states">
+        <item>Alabama,AL</item>
+        <item>Alaska,AK</item>
+        <item>American Samoa,AS</item>
+        <item>Arizona,AZ</item>
+        <item>Arkansas,AR</item>
+        <item>California,CA</item>
+        <item>Colorado,CO</item>
+        <item>Connecticut,CT</item>
+        <item>Delaware,DE</item>
+        <item>District of Columbia,DC</item>
+        <item>Florida,FL</item>
+        <item>Georgia,GA</item>
+        <item>Guam,GU</item>
+        <item>Hawaii,HI</item>
+        <item>Idaho,ID</item>
+        <item>Illinois,IL</item>
+        <item>Indiana,IN</item>
+        <item>Iowa,IA</item>
+        <item>Kansas,KS</item>
+        <item>Kentucky,KY</item>
+        <item>Louisiana,LA</item>
+        <item>Maine,ME</item>
+        <item>Maryland,MD</item>
+        <item>Massachusetts,MH</item>
+        <item>Michigan,MI</item>
+        <item>Micronesia,FM</item>
+        <item>Minnesota,MN</item>
+        <item>Mississippi,MS</item>
+        <item>Missouri,MO</item>
+        <item>Montana,MT</item>
+        <item>Nebraska,NE</item>
+        <item>Nevada,NV</item>
+        <item>New Hampshire,NH</item>
+        <item>New Jersey,NJ</item>
+        <item>New Mexico,NM</item>
+        <item>New York,NY</item>
+        <item>North Carolina,NC</item>
+        <item>North Dakota,ND</item>
+        <item>Northern Marianas Islands,MP</item>
+        <item>Ohio,OH</item>
+        <item>Oklahoma,OK</item>
+        <item>Oregon,OR</item>
+        <item>Palau,PW</item>
+        <item>Pennsylvania,PA</item>
+        <item>Puerto Rico,PR</item>
+        <item>Rhode Island,RI</item>
+        <item>South Carolina,SC</item>
+        <item>South Dakota,SD</item>
+        <item>Tennessee,TN</item>
+        <item>Texas,TX</item>
+        <item>Utah,UT</item>
+        <item>Vermont,VT</item>
+        <item>Virginia,VA</item>
+        <item>Virgin Islands,VI</item>
+        <item>Washington,WA</item>
+        <item>West Virginia,WV</item>
+        <item>Wisconsin,WI</item>
+        <item>Wyoming,WY</item>
+    </string-array>
+
+    <string-array name="canada_states">
+        <item>Alberta,AB</item>
+        <item>British Colombia,BC</item>
+        <item>Manitoba,MB</item>
+        <item>New Brunswick,NB</item>
+        <item>Newfoundland,NF</item>
+        <item>Northwest Territories,NT</item>
+        <item>Nova Scotia,NS</item>
+        <item>Nunavut,NU</item>
+        <item>Ontario,ON</item>
+        <item>Prince Edward Island,PE</item>
+        <item>Quebec,QC</item>
+        <item>Saskatchewan,SK</item>
+        <item>Yukon,YT</item>
+    </string-array>
 </resources>

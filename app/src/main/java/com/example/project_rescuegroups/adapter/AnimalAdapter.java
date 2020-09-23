@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,12 +20,13 @@ import java.util.List;
 
 public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.ViewHolder>  {
 
+    // attributes
     private List<Animal> animalList;
     private OnItemClickListener mListener;
     Context context;
 
     public interface OnItemClickListener{
-        void onItemClick(int position);
+        //void onItemClick(int position);
         void onFavoriteClick(int position);
         void onDetailClick(int position);
     }
@@ -50,7 +50,7 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.ViewHolder
             favorite = itemView.findViewById(R.id.btn_heart);
             btnDetail = itemView.findViewById(R.id.btnShowDetail);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
+/*            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(listener != null){
@@ -62,7 +62,7 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.ViewHolder
 
 
                 }
-            });
+            });*/
 
             favorite.setOnClickListener(new View.OnClickListener() {
                 @Override
